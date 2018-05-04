@@ -12,7 +12,13 @@ func main() {
 	fmt.Println("是否错误: ", dat.Build(words))
 	//dat.Dump()
 	index := dat.ExactMatchSearch("万能")
-	fmt.Println(words[index])
+	if index >= 0 {
+		fmt.Println(words[index])
+	}
+	index = dat.ExactMatchSearch("哈哈")
+	if index >= 0 {
+		fmt.Println(words[index])
+	}
 	fmt.Println("size ", dat.GetSize())
 	list := dat.CommonPrefixSearch("一举成名天下知")
 	for _, index := range list {
