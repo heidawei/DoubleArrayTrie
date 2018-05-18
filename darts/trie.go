@@ -2,7 +2,6 @@ package darts
 
 import (
 	"fmt"
-	"unicode/utf8"
 	"sort"
 )
 
@@ -44,27 +43,15 @@ func (l *ListNode) add(node *Node) {
 }
 
 type Word struct {
-	word   string
 	runes  []rune
 }
 
 func NewWord(word string) *Word {
-	var runes []rune
-	_word := []byte(word)
-	offset := 0
-	for len(_word[offset:]) > 0 {
-		r, size := utf8.DecodeRune(_word[offset:])
-		if r == utf8.RuneError {
-			panic("invalid word")
-		}
-		offset += size
-		runes = append(runes, r)
-	}
-	return &Word{word: word, runes: runes}
+	return &Word{runes: []rune(word)}
 }
 
 func (w *Word)GetWord() string {
-	return w.word
+	return string(w.runes)
 }
 
 func (w *Word)GetRune(index int) rune {
@@ -83,7 +70,7 @@ func (w *Word) Size() int {
 }
 
 func (w *Word)String() string {
-	return w.word
+	return string(w.runes)
 }
 
 type WordCodeDict struct {
